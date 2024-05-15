@@ -10,10 +10,6 @@ python manage.py makemigrations
 
 python manage.py migrate
 
-## Создание бд
-
-createdb barberbot_db
-
 ## Админка
 
 python manage.py createsuperuser

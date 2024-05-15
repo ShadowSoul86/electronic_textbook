@@ -23,7 +23,7 @@ SECRET_KEY = 'django-insecure-(+01s9wmq*z%5du4$3r&+a%^3w*om%!-$2owzpp348nn90ph%u
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://alyona-semenyakina.ru', 'http://127.0.0.1:8000', '*']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
 
 # Application definition
 

@@ -6,8 +6,6 @@ class Course(models.Model):
     title = models.CharField(max_length=256, verbose_name="Название")
     description = models.TextField(default="", verbose_name="Описание")
 
-    tasks = models.TextField(default="", verbose_name="Задачи")
-
     class Meta:
         verbose_name = "Курс"
         verbose_name_plural = "Курсы"
