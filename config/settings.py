@@ -37,7 +37,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'visitka'
+    'courses'
 ]
 
 MIDDLEWARE = [
@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("POSTGRESQLL_DATABASE", "visitka"),
-        "USER": os.environ.get("POSTGRESQL_USER", "visitka"),
-        "PASSWORD": os.environ.get("POSTGRESQL_PASSWORD", "visitka"),
+        "NAME": os.environ.get("POSTGRESQLL_DATABASE", "courses"),
+        "USER": os.environ.get("POSTGRESQL_USER", "courses"),
+        "PASSWORD": os.environ.get("POSTGRESQL_PASSWORD", "courses"),
         "HOST": os.environ.get("DB_HOST", "localhost"),
         "PORT": os.environ.get("DB_PORT", 5432),
     },
