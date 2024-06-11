@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Витрина курсов{% endblock %}
+
+{% block content %}
+    <div class="courses-wrap">
+        <div class="title">
+            Витрина курсов
+        </div>
+        <div class="courses-wrap-content">
+            {% for course in courses %}
+                <a href="{% url 'course_item' course_id=course.id %}" class="courses-item hint--bottom hint--rounded" aria-label="Перейти">
+                    <img src="{% if course.image %}{{ MEDIA_URL }}{{ course.image }}{% else %}{% static 'images/lection.jpg' %}{% endif %}">
+                    <div class="courses-item-content">
+                        <div class="courses-item-content-title">{{ course }}</div>
+                        <div class="courses-item-content-description">{{ course.description }}</div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

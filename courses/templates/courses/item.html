@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ course }}{% endblock %}
+
+{% block content %}
+    <div class="course-content">
+        <div class="title">
+            {{ course }}
+        </div>
+        <div class="items">
+            <div class="items-info">
+                Задание {{ selected_task_number }}/{{ tasks | length }}
+            </div>
+            {% for task in tasks %}
+                <a href="{% url 'course_item' course_id=course.id task_id=task.id %}" class="{% if task == selected_task %}items-counter-blue{% else %}items-counter{% endif %}">
+                    {{ forloop.counter }}
+                </a>
+            {% endfor %}
+        </div>
+        <div class="select-item">
+            <div class="select-item-info">
+                <div class="select-item-title">
+                    Задание: {{ selected_task }}
+                </div>
+                <div class="select-item-description">
+                    Описание: {{ selected_task.description }}
+                </div>
+            </div>
+            <div class="task-input-container">
+                <textarea class="task-input" placeholder="Введите свой ответ"></textarea>
+            </div>
+        </div>
+    </div>
+{% endblock %}

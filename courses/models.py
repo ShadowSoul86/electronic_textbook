@@ -1,10 +1,22 @@
+import uuid
+
 from django.contrib.auth.models import User
 from django.db import models
+
+
+def course_storage(instance, filename):
+    ext = filename.split(".")[-1]
+    uuid_filename = "{}.{}".format(uuid.uuid4(), ext)
+    return 'media/course_storage/{0}'.format(uuid_filename)
 
 
 class Course(models.Model):
     title = models.CharField(max_length=256, verbose_name="Название")
     description = models.TextField(default="", verbose_name="Описание")
+
+    image = models.ImageField(upload_to=course_storage, verbose_name="Изображение", null=True)
+
+    min_tasks_for_pass = models.IntegerField(verbose_name="Мин. Кол-во задач для прохождения", default=0)
 
     class Meta:
         verbose_name = "Курс"
@@ -20,7 +32,7 @@ class Task(models.Model):
     title = models.CharField(max_length=256, verbose_name="Название")
     description = models.TextField(default="", verbose_name="Описание")
 
-    min_tasks_for_pass = models.IntegerField(verbose_name="Мин. Кол-во задач для прохождения", default=0)
+    number = models.IntegerField(verbose_name="Позиция", default=0)
 
     class Meta:
         verbose_name = "Задание"

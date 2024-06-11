@@ -1,11 +1,48 @@
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}СДО СаАТ{% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h1 class="mt-5">Настройка и обеспечение функционирования программных средств и компьютерных систем</h1> 
-    <p class="lead">Используйте навигацию для доступа к лекциям, лабораторным работам и тестам.</p>
-</div>
+    <div class="container-card-long">
+        <img src="{% static 'images/ssau.png' %}"/>
+        <div class="text-center">
+            <p style="font-size: 50px; padding: 10px">СДО СаАТ</p>
+            <p class="lead">Система дополнительного обучения на базе "Авиационный техникум федерального государственного
+                автономного образовательного учреждения высшего образования «Самарский национальный исследовательский
+                университет имени академика С.П. Королева»
+                (Самарский авиационный техникум)"</p>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-between">
+        <div class="container-card">
+            <p class="top">Курсы</p>
+            <div class="bot">
+                <img src="{% static 'images/do.png' %}"/>
+                <div class="bot-content">
+                    <p class="lead">
+                        Проходите обучающие курсы, использузая наши методички. Познавайте новое, улучшайте
+                        свои навыки, делайте мир лучше
+                    </p>
+                    <a href="{% url 'courses_list' %}" style="display: flex; justify-content: end; text-decoration:none;">
+                        <p class="el-button">Посмотреть -></p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container-card">
+            <p class="top">Лекции и методички</p>
+            <div class="bot">
+                <img src="{% static 'images/lection.jpg' %}"/>
+                <div class="bot-content">
+                    <p class="lead">
+                        Информативная база. Бесплатные знания для всех. Электоррные учебники, лекции, методички
+                    </p>
+                    <a href="#" style="display: flex; justify-content: end; text-decoration:none;">
+                        <p class="el-button">Посмотреть -></p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,239 @@
+p {
+    margin-bottom: 0;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
+    background: #F5F5F5;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+nav {
+    max-width: 1140px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container {
+    padding: 0;
+}
+
+.container-card-long {
+    width: 100%;
+    /*margin-bottom: 25px;*/
+    background-color: #007bff !important;
+    color: white;
+    padding: 40px 30px 30px 30px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-card-long img {
+    width: 35%;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.container-card-long div {
+    width: 60%;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.container-card {
+    text-align: center;
+    max-width: 48%;
+    margin: 50px 0;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.4)
+}
+
+.container-card .top {
+    color: white;
+    background: #007bff !important;
+    padding: 10px;
+    border-radius: 30px 30px 0 0;
+    font-size: 40px;
+}
+
+.container-card .bot {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-card .bot img {
+    width: 200px;
+    /*border-radius: 30px;*/
+    margin: 10px;
+    box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bot-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.bot-content .el-button {
+    color: white;
+    background-color: #62dfc8;
+    font-size: 20px;
+    padding: 5px 20px;
+    display: inline-block;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.bot-content .el-button:hover {
+    background-color: #6df7e0;
+}
+
+.header-links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-links a {
+    color: white;
+    font-size: 15px;
+    padding: 15px;
+}
+
+.courses-wrap .title {
+    padding: 30px 0;
+    font-size: 30px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+
+.courses-wrap-content .courses-item {
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.courses-wrap-content .courses-item:hover {
+    box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.4)
+}
+
+.courses-wrap-content .courses-item img {
+    width: 20%;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.courses-item .courses-item-content {
+    margin: 10px;
+}
+
+.courses-item-content .courses-item-content-title {
+    font-size: 25px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.courses-item-content .courses-item-content-description {
+    font-size: 15px;
+}
+
+
+.course-content {
+    margin-top: 50px;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+.course-content .title {
+    padding-bottom: 30px;
+    font-size: 30px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.course-content .items {
+    display: flex;
+    flex-direction: row;
+}
+
+.course-content .items .items-info {
+    font-size: 20px;
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+
+.course-content .items .items-counter {
+    font-size: 20px;
+    background-color: white;
+    border-radius: 5px;
+    display: inline-block;
+    min-width: 30px;
+    color: #007bff;
+    text-align: center;
+    margin: 0 5px;
+    border: 1px solid #007bff;
+}
+
+.course-content .items .items-counter-blue {
+    font-size: 20px;
+    background-color: #007bff;
+    border-radius: 5px;
+    display: inline-block;
+    min-width: 30px;
+    color: white;
+    text-align: center;
+    margin: 0 5px;
+    border: 1px solid #007bff;
+}
+
+.select-item-info {
+    margin: 10px;
+    padding: 10px;
+    color: white;
+    background-color: #007bff;
+    border-radius: 20px;
+}
+
+.select-item-title {
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.select-item-description {
+    margin: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.task-input-container {
+    margin: 10px;
+}
+
+.task-input {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    border-radius: 20px;
+    padding: 10px;
+}
