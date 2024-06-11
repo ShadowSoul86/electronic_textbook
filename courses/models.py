@@ -20,7 +20,7 @@ class Task(models.Model):
     title = models.CharField(max_length=256, verbose_name="Название")
     description = models.TextField(default="", verbose_name="Описание")
 
-    min_tasks_for_pass = models.IntegerField(verbose_name="Мин. Кол-во задач для прохождения")
+    min_tasks_for_pass = models.IntegerField(verbose_name="Мин. Кол-во задач для прохождения", default=0)
 
     class Meta:
         verbose_name = "Задание"
