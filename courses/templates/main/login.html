@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="title">
+                    Авторизация
+                </div>
+                <div class="login-card-inputs">
+                    <input placeholder="Почта" name="email">
+                    <input placeholder="Пароль" name="password">
+                    <div class="error">
+                        <div>{{ error }}</div>
+                    </div>
+                    <div>
+                        <button type="submit">Отправить</button>
+                    </div>
+                </div>
+                <div class="links">
+                    <a href="{% url 'register' %}">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

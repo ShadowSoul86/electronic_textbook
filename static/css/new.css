@@ -227,7 +227,7 @@ nav {
 }
 
 .task-input-container {
-    margin: 10px;
+    margin: 30px;
 }
 
 .task-input {
@@ -236,4 +236,76 @@ nav {
     resize: none;
     border-radius: 20px;
     padding: 10px;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-card {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background-color: #007bff;
+    border-radius: 30px;
+    margin: 50px;
+    padding: 20px;
+}
+
+.login-card .title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.login-card .links {
+    text-align: end;
+}
+
+.login-card .links a {
+    color: white;
+}
+
+.login-card-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-card-inputs input {
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.login-card-inputs div {
+    display: inline;
+}
+
+.login-card-inputs button {
+    width: auto;
+    border-radius: 10px;
+    margin: 10px;
+    color: white;
+    background-color: #62dfc8;
+    border: 1px solid #62dfc8;
+    padding: 5px;
+}
+
+.login-card-inputs button:hover {
+    background-color: #6df7e0;
+    border: 1px solid #6df7e0;
+}
+
+
+.login-card-inputs .error {
+    font-size: 15px;
+    color: black;
+    background-color: red;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-card-inputs .error div {
+
 }

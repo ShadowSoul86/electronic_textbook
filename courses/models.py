@@ -30,7 +30,6 @@ class Task(models.Model):
     course = models.ForeignKey(Course, related_name="tasks", on_delete=models.CASCADE, verbose_name="Курс")
 
     title = models.CharField(max_length=256, verbose_name="Название")
-    description = models.TextField(default="", verbose_name="Описание")
 
     number = models.IntegerField(verbose_name="Позиция", default=0)
 
@@ -42,6 +41,24 @@ class Task(models.Model):
         return self.title
 
 
+class TaskOption(models.Model):
+    task = models.ForeignKey(Task, related_name="options", on_delete=models.CASCADE, verbose_name="Задание")
+
+    title = models.CharField(max_length=256, verbose_name="Название")
+
+    correctly = models.BooleanField(default=False, verbose_name="correctly")
+
+    class Meta:
+        verbose_name = "Вариант ответа на задание"
+        verbose_name_plural = "Варианты ответов на задания"
+
+    def __str__(self):
+        return self.title
+
+    def checked(self, user) -> bool:
+        return bool(Answer.objects.filter(answer_option=self, user=user).first())
+
+
 class AnswerStatus(models.IntegerChoices):
     ON_CHECK = 0, "На проверке"
     NOT_PASSED = 1, "Не пройдено"
@@ -49,14 +66,15 @@ class AnswerStatus(models.IntegerChoices):
 
 
 class Answer(models.Model):
-    answer_body = models.TextField(default="", verbose_name="Тело ответа")
-
     user = models.ForeignKey(User, related_name='answers', on_delete=models.CASCADE, verbose_name="Пользователь")
 
     task = models.ForeignKey(Task, related_name='answers', on_delete=models.CASCADE, verbose_name="Задание")
 
     status = models.IntegerField(choices=AnswerStatus.choices, default=AnswerStatus.ON_CHECK,
                                  verbose_name="Тип услуги")
+
+    answer_option = models.ForeignKey(TaskOption, related_name="answers", on_delete=models.CASCADE,
+                                      verbose_name="Вариант ответа на задание")
 
     class Meta:
         verbose_name = "Ответ пользователя"

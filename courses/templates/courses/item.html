@@ -13,7 +13,8 @@
                 Задание {{ selected_task_number }}/{{ tasks | length }}
             </div>
             {% for task in tasks %}
-                <a href="{% url 'course_item' course_id=course.id task_id=task.id %}" class="{% if task == selected_task %}items-counter-blue{% else %}items-counter{% endif %}">
+                <a href="{% url 'course_item' course_id=course.id task_id=task.id %}"
+                   class="{% if task == selected_task %}items-counter-blue{% else %}items-counter{% endif %}">
                     {{ forloop.counter }}
                 </a>
             {% endfor %}
@@ -28,7 +29,14 @@
                 </div>
             </div>
             <div class="task-input-container">
-                <textarea class="task-input" placeholder="Введите свой ответ"></textarea>
+                <input type="hidden" name="task" value="{{ task.id }}">
+                {% for option in options %}
+                    <div>
+                        <input type="radio" id="{{ option.id }}" name="option" value="{{ option.id }}"
+                               {% if option.checked %}checked{% endif %}/>
+                        <label for="huey">{{ option.title }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

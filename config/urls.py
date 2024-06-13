@@ -3,12 +3,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from courses.views import index
+from courses.views import index, login, register, logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', index, name='index'),
+    path('login/', login, name='login'),
+    path('logout/', logout, name='logout'),
+    path('register/', register, name='register'),
 
     path('courses/', include('courses.urls'), name='visitka')
 ]

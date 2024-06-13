@@ -70,7 +70,11 @@
             <a href="{% url 'courses_list' %}">Курсы</a>
             <a href="{% url 'index' %}">Лекции и методички</a>
 
-<!--            <a style="padding-left: 30px" href="{% url 'index' %}">Вход</a>-->
+            {% if request.user.is_authenticated %}
+                <a style="padding-left: 30px" href="{% url 'logout' %}">Выход</a>
+            {% else %}
+                <a style="padding-left: 30px" href="{% url 'login' %}">Вход</a>
+            {% endif %}
         </div>
     </div>
 </nav>
@@ -79,7 +83,7 @@
 </div>
 <footer class="footer bg-primary text-white text-center py-3">
     <div style="text-align: center">
-        <p>Самарский авиационный техникум 2024 ©. Разработанно Сироткин Сергеем ВМ-66 (9404)</p>
+        <p>*Некомерческий проект. СДО "Узнавайка" ©. Разработанно Сироткин Сергеем ВМ-66 (9404).</p>
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
