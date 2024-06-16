@@ -4,45 +4,47 @@
 {% block title %}СДО "Узнавайка"{% endblock %}
 
 {% block content %}
-    <div class="container-card-long">
-        <img src="{% static 'images/ssau.png' %}"/>
-        <div class="text-center">
-            <p style="font-size: 50px; padding: 10px">СДО "Узнавайка"</p>
-            <p class="lead">Система дополнительного обучения "Узнавайка" разработана на базе "«Самарский национальный исследовательский
-                университет имени академика С.П. Королева»
-                (Самарский авиационный техникум)"</p>
-            <p class="lead">* Системая является некомерческой и создана в образовательных целях, в рамках дипломного проекта.</p>
-        </div>
+<div class="container-card-long">
+    <img src="{% static 'images/ssau.png' %}"/>
+    <div class="text-center">
+        <p style="font-size: 50px; padding: 10px">СДО "Узнавайка"</p>
+        <p class="lead">Система дополнительного обучения "Узнавайка" разработана на базе "«Самарский национальный
+            исследовательский
+            университет имени академика С.П. Королева»
+            (Самарский авиационный техникум)"</p>
+        <p class="lead">* Системая является некомерческой и создана в образовательных целях, в рамках дипломного
+            проекта. Название системы вымышленно и указанно только только для демонстрации дипломного проекта.</p>
     </div>
-    <div style="display: flex; justify-content: space-between">
-        <div class="container-card">
-            <p class="top">Курсы</p>
-            <div class="bot">
-                <img src="{% static 'images/do.png' %}"/>
-                <div class="bot-content">
-                    <p class="lead">
-                        Проходите обучающие курсы, использузая наши методички. Познавайте новое, улучшайте
-                        свои навыки, делайте мир лучше
-                    </p>
-                    <a href="{% url 'courses_list' %}" style="display: flex; justify-content: end; text-decoration:none;">
-                        <p class="el-button">Посмотреть -></p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="container-card">
-            <p class="top">Лекции и методички</p>
-            <div class="bot">
-                <img src="{% static 'images/lection.jpg' %}"/>
-                <div class="bot-content">
-                    <p class="lead">
-                        Информативная база. Бесплатные знания для всех. Электоррные учебники, лекции, методички
-                    </p>
-                    <a href="#" style="display: flex; justify-content: end; text-decoration:none;">
-                        <p class="el-button">Посмотреть -></p>
-                    </a>
-                </div>
+</div>
+<div style="display: flex; justify-content: space-between">
+    <div class="container-card">
+        <p class="top">Курсы</p>
+        <div class="bot">
+            <img src="{% static 'images/do.png' %}"/>
+            <div class="bot-content">
+                <p class="lead">
+                    Проходите обучающие курсы, использузая наши методички. Познавайте новое, улучшайте
+                    свои навыки, делайте мир лучше
+                </p>
+                <a href="{% url 'courses_list' %}" style="display: flex; justify-content: end; text-decoration:none;">
+                    <p class="el-button">Посмотреть -></p>
+                </a>
             </div>
         </div>
     </div>
+    <div class="container-card">
+        <p class="top">Лекции и методички</p>
+        <div class="bot">
+            <img src="{% static 'images/lection.jpg' %}"/>
+            <div class="bot-content">
+                <p class="lead">
+                    Информативная база. Бесплатные знания для всех. Электоррные учебники, лекции, методички
+                </p>
+                <a href="{% url 'lectures_list' %}" style="display: flex; justify-content: end; text-decoration:none;">
+                    <p class="el-button">Посмотреть -></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

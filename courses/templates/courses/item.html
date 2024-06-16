@@ -4,40 +4,129 @@
 {% block title %}{{ course }}{% endblock %}
 
 {% block content %}
-    <div class="course-content">
-        <div class="title">
-            {{ course }}
-        </div>
-        <div class="items">
-            <div class="items-info">
-                Задание {{ selected_task_number }}/{{ tasks | length }}
+<div class="back-link">
+    <a href="{% url 'courses_list' %}">
+        <- Назад к курсам
+    </a>
+</div>
+
+<div class="course-content">
+    <div class="course-content-header">
+        <div>
+            <div class="title">
+                {{ course }}
             </div>
-            {% for task in tasks %}
+            <div class="items">
+                <div class="items-info">
+                    Задание {{ selected_task_number }}/{{ tasks_count }}
+                </div>
+                {% for task in tasks %}
+                {% with user_answer=task.user_answer %}
                 <a href="{% url 'course_item' course_id=course.id task_id=task.id %}"
-                   class="{% if task == selected_task %}items-counter-blue{% else %}items-counter{% endif %}">
+                   class="{% if task.id == selected_task.id %}underline{% endif %}
+           {% if user_answer and user_answer.correctly %}items-counter-green
+           {% elif user_answer and not user_answer.correctly %}items-counter-red
+           {% else %}items-counter{% endif %}">
                     {{ forloop.counter }}
                 </a>
-            {% endfor %}
-        </div>
-        <div class="select-item">
-            <div class="select-item-info">
-                <div class="select-item-title">
-                    Задание: {{ selected_task }}
-                </div>
-                <div class="select-item-description">
-                    Описание: {{ selected_task.description }}
-                </div>
-            </div>
-            <div class="task-input-container">
-                <input type="hidden" name="task" value="{{ task.id }}">
-                {% for option in options %}
-                    <div>
-                        <input type="radio" id="{{ option.id }}" name="option" value="{{ option.id }}"
-                               {% if option.checked %}checked{% endif %}/>
-                        <label for="huey">{{ option.title }}</label>
-                    </div>
+                {% endwith %}
                 {% endfor %}
             </div>
         </div>
+        <div class="statistics">
+            <p style="color: #62dfc8">Правильно: {{ tasks_complete }}</p>
+            <p style="color: red">Не правильно: {{ tasks_not_passed }}</p>
+            <p>Без ответа: {{ tasks_no_answer }}</p>
+        </div>
     </div>
+    <div class="select-item">
+        <div class="select-item-info">
+            <div class="select-item-title">
+                <div>Задание {{ selected_task_number }}: {{ selected_task }}</div>
+                {% if selected_task.file %}
+                <a href="{{CURRENT_DOMAIN}}{{ MEDIA_URL }}{{selected_task.file}}" style="height: 24px">
+                    Скачать методический материал
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height: 24px">
+                        <defs>
+                            <style>.cls-1 {
+                                fill: white;
+                                opacity: 0;
+                            }
+
+                            .cls-2 {
+                                fill: white;
+                            }</style>
+                        </defs>
+                        <title>download</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="download">
+                                <g id="download-2" data-name="download">
+                                    <rect class="cls-1" width="24" height="24"/>
+                                    <rect class="cls-2" x="4" y="18" width="16" height="2" rx="1" ry="1"/>
+                                    <rect class="cls-2" x="3" y="17" width="4" height="2" rx="1" ry="1"
+                                          transform="translate(-13 23) rotate(-90)"/>
+                                    <rect class="cls-2" x="17" y="17" width="4" height="2" rx="1" ry="1"
+                                          transform="translate(1 37) rotate(-90)"/>
+                                    <path class="cls-2"
+                                          d="M12,15a1,1,0,0,1-.58-.18L7.42,12a1,1,0,0,1-.24-1.39,1,1,0,0,1,1.4-.24L12,12.76,15.4,10.2a1,1,0,0,1,1.2,1.6l-4,3A1,1,0,0,1,12,15Z"/>
+                                    <path class="cls-2" d="M12,13a1,1,0,0,1-1-1V4a1,1,0,0,1,2,0v8A1,1,0,0,1,12,13Z"/>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+                {% endif %}
+            </div>
+            <div class="select-item-description">
+                {% if selected_task.file %}Ознакомьтесь с методическим материалом, после чего в
+                {% else %}В{% endif %}ыберите правильный ответ, из перечисленных.
+            </div>
+        </div>
+        <form method="POST">
+            <div class="task-input-container">
+                <input type="hidden" name="task" value="{{ selected_task.id }}">
+                {% for option in options %}
+                <div>
+                    <input type="radio" id="{{ option.id }}" name="option" value="{{ option.id }}"
+                           {% if option.checked != None %}checked{% endif %}/>
+                    <label for="{{ option.id }}">{{ option.title }}</label>
+                </div>
+                {% endfor %}
+                <div class="task-input-container-buttons">
+                    {% if selected_task_number == tasks_count %}
+                    {% if tasks_no_answer == 0 %}
+                    <button type="submit" name="go_to_courses">
+                        Вернутся к курсам
+                    </button>
+                    <button type="submit" name="go_again">
+                        Пройти заново
+                    </button>
+                    {% endif %}
+                    <button type="submit">
+                        Ответить
+                    </button>
+                    {% else %}
+                    <button type="submit">
+                        Следующий вопрос ->
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const inputCases = document.querySelectorAll(`input[name="option"]`);
+    const button = document.querySelector(`button[type="submit"]`);
+
+    button.disabled = !Array.from(inputCases).some((input) => input.checked);
+    inputCases.forEach((input) => {
+        input.addEventListener(`change`, (event) => {
+            button.disabled = !Array.from(inputCases).some((input) => input.checked);
+        });
+    });
+</script>
 {% endblock %}

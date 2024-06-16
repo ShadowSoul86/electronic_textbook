@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from config import settings
-from courses.models import Course, Task
+from courses.models import Course, Task, TaskOption, Answer
 
 
 def index(request):
@@ -34,25 +34,28 @@ def logout(request):
     return redirect('index')
 
 
+def __post_register(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    password_again = request.POST['password_again']
+
+    user = User.objects.filter(email=email).first()
+    if user:
+        return render(request, 'main/register.html',
+                      context=dict(error='Пользователь с данным email уже зарегистрирован'))
+    elif password != password_again:
+        return render(request, 'main/register.html',
+                      context=dict(error='Пароли не совпадают'))
+    else:
+        user = User.objects.create_user(email=email, password=password)
+        login_user(request, user)
+        return redirect('index')
+
+
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        password_again = request.POST['password_again']
-
-        user = User.objects.filter(email=email).first()
-        if user:
-            return render(request, 'main/login.html',
-                          context=dict(error='Пользователь с данным email уже зарегистрирован'))
-        elif password != password_again:
-            return render(request, 'main/login.html',
-                          context=dict(error='Пароли не совпадают'))
-        else:
-            user = User.objects.create_user(email=email, password=password)
-            login_user(request, user)
-            return redirect('index')
-
+        return __post_register(request)
     return render(request, 'main/register.html')
 
 
@@ -62,13 +65,46 @@ def courses_list(request):
 
     return render(request, 'courses/list.html', context=dict(
         MEDIA_URL=settings.MEDIA_URL,
-        courses=Course.objects.filter(tasks__isnull=False).distinct().all()
+        courses=[
+            {
+                'id': course.id,
+                'title': course.title,
+                'description': course.description,
+                **course.get_statistics(request.user)
+            } for course in Course.objects.all() if course.tasks
+        ]
     ))
 
 
+def __post___course_item(request, course_id):
+    task = Task.objects.get(pk=request.POST['task'], course_id=course_id)
+    option = TaskOption.objects.get(pk=request.POST['option'])
+
+    try:
+        answer = Answer.objects.get(task=task, user=request.user)
+        answer.answer_option = option
+    except Answer.DoesNotExist:
+        answer = Answer.objects.create(task=task, user=request.user, answer_option=option)
+    answer.save()
+
+    if next_task := task.next_task:
+        return redirect('course_item', course_id=course_id, task_id=next_task.id)
+    else:
+        if request.POST.get('go_again') is not None:
+            Answer.objects.filter(task__course_id=course_id, user=request.user).delete()
+            return redirect('course_item', course_id=course_id)
+        elif request.POST.get('go_to_courses') is not None:
+            return redirect('courses_list')
+        return redirect('course_item', course_id=course_id, task_id=task.id)
+
+
+@csrf_exempt
 def course_item(request, course_id, task_id=None):
     if not request.user.is_authenticated:
         return redirect('login')
+
+    if request.method == 'POST':
+        return __post___course_item(request, course_id)
 
     course = Course.objects.get(pk=course_id)
 
@@ -89,14 +125,27 @@ def course_item(request, course_id, task_id=None):
     selected_task = selected_task or tasks[0]
 
     return render(request, 'courses/item.html', context=dict(
+        CURRENT_DOMAIN=settings.CURRENT_DOMAIN,
         MEDIA_URL=settings.MEDIA_URL,
         course=course,
-        tasks=tasks,
+        tasks=[{
+            'id': task.id,
+            'user_answer': task.get_user_answer(request.user),
+        } for task in tasks],
         selected_task=selected_task,
         selected_task_number=selected_task_number or 1,
         options=list(map(lambda x: {
             'title': str(x),
             'id': x.id,
             'checked': x.checked(request.user),
-        }, selected_task.options.all()))
+        }, selected_task.options.order_by('?').all())),
+        **course.get_statistics(request.user)
+    ))
+
+
+def lectures_list(request):
+    return render(request, 'courses/lectures.html', context=dict(
+        CURRENT_DOMAIN=settings.CURRENT_DOMAIN,
+        MEDIA_URL=settings.MEDIA_URL,
+        tasks=Task.objects.exclude(file=None).all()
     ))

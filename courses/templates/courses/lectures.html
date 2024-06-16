@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Витрина курсов{% endblock %}
+
+{% block content %}
+<div class="back-link">
+    <a href="{% url 'index' %}">
+        <- Назад
+    </a>
+</div>
+<div class="courses-wrap">
+    <div class="title">
+        База знаний СДО "Узнавайка"
+        <p style="font-size: 15px">Здесь вы найдёте все прикреплённые материалы, со всех доступных курсов системы</p>
+    </div>
+    <div class="courses-wrap-content">
+        {% for task in tasks %}
+        <div class="courses-item">
+            <div class="courses-item-content" style="width: 100%">
+                <div>
+                    <div class="courses-item-content-title">Курс: {{ task.course.title }}</div>
+                    <div class="courses-item-content-description">Задание: {{ task.title }}</div>
+                </div>
+                <div style="display: flex; justify-content: center; flex-direction: column">
+                    <a href="{{CURRENT_DOMAIN}}{{ MEDIA_URL }}{{task.file}}" style="height: 40px; font-size: 30px">
+                        Скачать методический материал
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height: 40px">
+                            <defs>
+                                <style>.cls-1 {
+                                    fill: #007bff;
+                                    opacity: 0;
+                                }
+
+                                .cls-2 {
+                                    fill: #007bff;
+                                }</style>
+                            </defs>
+                            <title>download</title>
+                            <g id="Layer_2" data-name="Layer 2">
+                                <g id="download">
+                                    <g id="download-2" data-name="download">
+                                        <rect class="cls-1" width="24" height="24"/>
+                                        <rect class="cls-2" x="4" y="18" width="16" height="2" rx="1" ry="1"/>
+                                        <rect class="cls-2" x="3" y="17" width="4" height="2" rx="1" ry="1"
+                                              transform="translate(-13 23) rotate(-90)"/>
+                                        <rect class="cls-2" x="17" y="17" width="4" height="2" rx="1" ry="1"
+                                              transform="translate(1 37) rotate(-90)"/>
+                                        <path class="cls-2"
+                                              d="M12,15a1,1,0,0,1-.58-.18L7.42,12a1,1,0,0,1-.24-1.39,1,1,0,0,1,1.4-.24L12,12.76,15.4,10.2a1,1,0,0,1,1.2,1.6l-4,3A1,1,0,0,1,12,15Z"/>
+                                        <path class="cls-2"
+                                              d="M12,13a1,1,0,0,1-1-1V4a1,1,0,0,1,2,0v8A1,1,0,0,1,12,13Z"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -53,7 +53,7 @@ nav {
 .container-card {
     text-align: center;
     max-width: 48%;
-    margin: 50px 0;
+    margin: 50px 0 100px 0;
     background-color: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.4)
@@ -113,7 +113,7 @@ nav {
 }
 
 .courses-wrap .title {
-    padding: 30px 0;
+    padding-bottom: 30px;
     font-size: 30px;
     color: #007bff;
     font-weight: bold;
@@ -141,7 +141,11 @@ nav {
 }
 
 .courses-item .courses-item-content {
+    width: 80%;
     margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 .courses-item-content .courses-item-content-title {
@@ -206,6 +210,30 @@ nav {
     border: 1px solid #007bff;
 }
 
+.course-content .items .items-counter-green {
+    font-size: 20px;
+    background-color: #62dfc8;
+    border-radius: 5px;
+    display: inline-block;
+    min-width: 30px;
+    color: white;
+    text-align: center;
+    margin: 0 5px;
+    border: 1px solid #62dfc8;
+}
+
+.course-content .items .items-counter-red {
+    font-size: 20px;
+    background-color: red;
+    border-radius: 5px;
+    display: inline-block;
+    min-width: 30px;
+    color: white;
+    text-align: center;
+    margin: 0 5px;
+    border: 1px solid red;
+}
+
 .select-item-info {
     margin: 10px;
     padding: 10px;
@@ -216,14 +244,24 @@ nav {
 
 .select-item-title {
     margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.select-item-title div {
     font-size: 20px;
     font-weight: bold;
+}
+.select-item-title a {
+    color: white;
+    font-size: 15px;
+    font-weight: normal;
+    display: flex;
+    flex-direction: row;
 }
 
 .select-item-description {
     margin: 10px;
     font-size: 15px;
-    font-weight: bold;
 }
 
 .task-input-container {
@@ -308,4 +346,55 @@ nav {
 
 .login-card-inputs .error div {
 
+}
+
+.login-card-inputs div {
+    display: inline;
+}
+
+.task-input-container-buttons {
+    display: flex;
+    justify-content: end;
+}
+
+.task-input-container-buttons button {
+    width: auto;
+    border-radius: 10px;
+    margin: 10px;
+    color: white;
+    background-color: #62dfc8;
+    border: 1px solid #62dfc8;
+    padding: 5px;
+}
+
+.task-input-container-buttons button:hover {
+    background-color: #6df7e0;
+    border: 1px solid #6df7e0;
+}
+
+button:disabled, button[disabled], button:hover:disabled, button:hover[disabled] {
+    background-color: gray;
+    border: 1px solid gray;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.course-content-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.statistics {
+    max-height: 92px;
+    margin: 10px;
+    padding: 10px;
+    color: white;
+    background-color: #007bff;
+    border-radius: 20px;
+}
+
+.back-link {
+    margin: 15px 0;
 }

@@ -4,20 +4,35 @@
 {% block title %}Витрина курсов{% endblock %}
 
 {% block content %}
-    <div class="courses-wrap">
-        <div class="title">
-            Витрина курсов
-        </div>
-        <div class="courses-wrap-content">
-            {% for course in courses %}
-                <a href="{% url 'course_item' course_id=course.id %}" class="courses-item hint--bottom hint--rounded" aria-label="Перейти">
-                    <img src="{% if course.image %}{{ MEDIA_URL }}{{ course.image }}{% else %}{% static 'images/lection.jpg' %}{% endif %}">
-                    <div class="courses-item-content">
-                        <div class="courses-item-content-title">{{ course }}</div>
-                        <div class="courses-item-content-description">{{ course.description }}</div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
+<div class="back-link">
+    <a href="{% url 'index' %}">
+        <- Назад
+    </a>
+</div>
+<div class="courses-wrap">
+    <div class="title">
+        Витрина курсов
     </div>
+    <div class="courses-wrap-content">
+        {% for course in courses %}
+        <a href="{% url 'course_item' course_id=course.id %}" class="courses-item hint--bottom hint--rounded"
+           aria-label="Перейти">
+            <img src="{% if course.image %}{{ MEDIA_URL }}{{ course.image }}{% else %}{% static 'images/lection.jpg' %}{% endif %}">
+            <div class="courses-item-content">
+                <div>
+                    <div class="courses-item-content-title">{{ course.title }}</div>
+                    <div class="courses-item-content-description">{{ course.description }}</div>
+                </div>
+                <div style="display: flex; justify-content: end">
+                    <div class="statistics">
+                        <p style="color: #62dfc8">Правильно: {{ course.tasks_complete }}</p>
+                        <p style="color: red">Не правильно: {{ course.tasks_not_passed }}</p>
+                        <p>Без ответа: {{ course.tasks_no_answer }}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
