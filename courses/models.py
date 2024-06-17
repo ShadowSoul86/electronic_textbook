@@ -17,8 +17,6 @@ class Course(models.Model):
 
     image = models.ImageField(upload_to=course_storage, verbose_name="Изображение", null=True)
 
-    min_tasks_for_pass = models.IntegerField(verbose_name="Мин. Кол-во задач для прохождения", default=0)
-
     class Meta:
         verbose_name = "Курс"
         verbose_name_plural = "Курсы"
