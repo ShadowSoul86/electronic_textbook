@@ -70,6 +70,7 @@ def courses_list(request):
                 'id': course.id,
                 'title': course.title,
                 'description': course.description,
+                'image': course.image,
                 **course.get_statistics(request.user)
             } for course in Course.objects.all() if course.tasks
         ]
